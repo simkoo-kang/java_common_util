@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import kr.pe.util.Mat;
+
 /**
  * <pre>
  * patternStr에 매칭되는 문자열을 리스트에 담고
@@ -23,6 +25,15 @@ public class StrIter implements Iter {
 
 	private List<String> finds;
 
+	private static String strPattern = "[^\\d\\s]+";
+
+	/**
+	 * <pre></pre>
+	 */
+	public StrIter() {
+		this(strPattern);
+	}
+
 	/**
 	 * <pre></pre>
 	 * 
@@ -33,6 +44,30 @@ public class StrIter implements Iter {
 		this.patternStr = patternStr;
 		this.pattern = Pattern.compile(this.patternStr);
 		this.finds = new ArrayList<>();
+	}
+
+	/**
+	 * <pre></pre>
+	 * 
+	 * @param line
+	 * @return
+	 */
+	public static Iter getStrIter(String line) {
+		Iter it = getStrIter();
+		it.find(line);
+		return it;
+	}
+
+	/**
+	 * <pre>
+	 * not space
+	 * </pre>
+	 * 
+	 * @return
+	 */
+	public static StrIter getStrIter() {
+		// not space
+		return new StrIter("[^\\s]+");
 	}
 
 	@Override
@@ -106,5 +141,11 @@ public class StrIter implements Iter {
 	 */
 	public int size() {
 		return this.finds.size();
+	}
+
+	@Override
+	public int nextInt() {
+		String s = this.next();
+		return Mat.parseInt(s);
 	}
 }

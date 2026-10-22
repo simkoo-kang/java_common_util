@@ -10,6 +10,7 @@ import java.io.StringWriter;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.Marshaller;
 import jakarta.xml.bind.Unmarshaller;
+import kr.pe.util.xml.sample.TestUserDto;
 
 /**
  * <pre></pre>
@@ -28,7 +29,7 @@ public class Jaxb {
 		System.out.println("========== 1. 객체를 XML로 변환 (Marshalling) ==========");
 
 		// 1) 테스트할 데이터 객체 생성
-		UserTestDto user = new UserTestDto("user_99", "임꺽정", 35);
+		TestUserDto user = new TestUserDto("user_99", "임꺽정", 35);
 
 		// 2) 앞서 만든 유틸리티를 이용해 XML 변환
 		String xmlOutput = Jaxb.convertToXml(user);
@@ -43,7 +44,7 @@ public class Jaxb {
 				+ "    <name>심청이</name>\n" + "    <age>18</age>\n" + "</user>";
 
 		// 2) 유틸리티를 이용해 객체로 복원
-		UserTestDto restoredUser = Jaxb.convertToObject(inputXml, UserTestDto.class);
+		TestUserDto restoredUser = Jaxb.convertToObject(inputXml, TestUserDto.class);
 
 		// 3) 값이 잘 들어왔는지 출력해보기
 		System.out.println("복원된 ID  : " + restoredUser.getId());

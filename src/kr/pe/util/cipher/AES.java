@@ -145,7 +145,7 @@ public class AES {
 	 */
 	public static void main(String[] args) {
 
-		String plainText = "우리나라 금수강산 대한민국";
+		String plainText = "victory!963";
 		String encodedString;
 		int loop = 1;
 		try {

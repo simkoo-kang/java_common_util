@@ -3,6 +3,7 @@
  */
 package kr.pe.util;
 
+import java.awt.Color;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Collection;
@@ -48,6 +49,34 @@ public final class Str {
 	 */
 	public static void main(String[] args) {
 		logger.debug("Str");
+	}
+
+	/**
+	 * <pre></pre>
+	 * 
+	 * @param hex
+	 * @return
+	 */
+	public static String hexToRgb(String hex) {
+		Color color = Color.decode(hex);
+		int r = color.getRed();
+		int g = color.getGreen();
+		int b = color.getBlue();
+		return r + "," + g + "," + b;
+	}
+
+	/**
+	 * <pre></pre>
+	 * 
+	 * @param rgb
+	 * @return
+	 */
+	public static String rgbToHex(String rgb) {
+		String[] ss = rgb.split(",");
+		int r = Mat.parseInt(ss[0]);
+		int g = Mat.parseInt(ss[1]);
+		int b = Mat.parseInt(ss[2]);
+		return String.format("#%02X%02X%02X", r, g, b);
 	}
 
 	/**

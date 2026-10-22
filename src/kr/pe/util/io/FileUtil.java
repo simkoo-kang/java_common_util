@@ -5,6 +5,9 @@ package kr.pe.util.io;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -31,6 +34,21 @@ public class FileUtil {
 	public final static String PATH_사진 = "C:/Users/PC/OneDrive/사진";
 	public final static String PATH_ECLIPSE = "D:/Workspace/eclipse";
 	public final static String PATH_CAPTURE = "D:/M/F/Capture";
+
+	/**
+	 * <pre></pre>
+	 * 
+	 * @param url
+	 * @return
+	 */
+	public static String getAbsolutePath(URL url) {
+		try {
+			return Paths.get(url.toURI()).toString();
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	/**
 	 * <pre>

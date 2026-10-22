@@ -1,7 +1,7 @@
 /**
  * UserDto.java
  */
-package kr.pe.util.xml;
+package kr.pe.util.xml.sample;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
@@ -22,7 +22,7 @@ public class UserDto {
 	// element.setAttribute("id", "1") 역할과 동일하게 매핑됨
 	@XmlAttribute(name = "id")
 	public String getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(String id) {
@@ -31,7 +31,7 @@ public class UserDto {
 
 	@XmlElement(name = "name")
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public void setName(String name) {
@@ -40,7 +40,7 @@ public class UserDto {
 
 	@XmlElement(name = "age")
 	public int getAge() {
-		return age;
+		return this.age;
 	}
 
 	public void setAge(int age) {

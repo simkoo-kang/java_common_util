@@ -20,6 +20,15 @@ public class NumIter extends StrIter {
 		super(numPattern);
 	}
 
+	/**
+	 * <pre></pre>
+	 * 
+	 * @param patternStr
+	 */
+	public NumIter(String patternStr) {
+		super(patternStr);
+	}
+
 	public static void main(String[] args) {
 		String line = "1등 28669084128원 16 1791817758원 6개번호 일치 2등 4778180706원 78 61258727원 5개번호 일치 + 보너스번호 일치 3등 4778182080원 3087 1547840원 5개번호 일치 4등 7760100000원 155202 50000원 4개번호 일치 5등 13097115000원 2619423 5000원 3개번호 일치 ";
 		NumIter niter = new NumIter();

@@ -17,6 +17,8 @@ public interface Iter {
 
 	public String next();
 
+	public int nextInt();
+
 	public int size();
 
 	public String matchStringAll();

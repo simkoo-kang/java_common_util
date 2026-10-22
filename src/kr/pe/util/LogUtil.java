@@ -20,6 +20,20 @@ public class LogUtil {
 	private static final Map<Object, Logger> savedLoggerMap = new HashMap<>();
 
 	/**
+	 * <pre></pre>
+	 * 
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		Logger logger = LogUtil.getLogger(LogUtil.class);
+		try {
+			throw new Exception("test");
+		} catch (Exception e) {
+			logger.debug("exception {}", e.getMessage(), e);
+		}
+	}
+
+	/**
 	 * <pre>
 	 * 
 	 * PC 2026. 9. 8. 오후 10:00:23
@@ -169,37 +183,5 @@ public class LogUtil {
 	 */
 	public static Logger getLogger(String name) {
 		return LoggerFactory.getLogger(name);
-	}
-
-	public static void main(String[] args) {
-
-		execute();
-//		StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
-//
-//		for (StackTraceElement e : stackTrace) {
-//			System.out.println(e.getClassName());
-//		}
-	}
-
-	/**
-	 * <pre>
-	 * 
-	 * PC 2026. 9. 10. 오후 8:48:05
-	 * </pre>
-	 *
-	 */
-	private static void execute() {
-		executeNext();
-	}
-
-	/**
-	 * <pre>
-	 * 
-	 * PC 2026. 9. 10. 오후 8:48:21
-	 * </pre>
-	 *
-	 */
-	private static void executeNext() {
-		System.out.println(LogUtil.getCallerName(LogUtil.class));
 	}
 }

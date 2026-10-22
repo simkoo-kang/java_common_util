@@ -86,28 +86,32 @@ public final class Arr {
 	 * 2차원 배열 복사
 	 * 성능
 	 * </pre>
+	 * 
 	 * @param matrix
 	 * @return
 	 */
-	public static String[][] copyMe(String[][] matrix){
+	public static String[][] copyMe(String[][] matrix) {
 		String[][] copy = new String[matrix.length][];
-		for(int i=0; i<matrix.length; i++) {
+		for (int i = 0; i < matrix.length; i++) {
 			copy[i] = matrix[i].clone();
 		}
 		return copy;
 	}
+
 	/**
 	 * <pre>
 	 * 방법 2. Stream API 사용하기 (Java 8 이상, 한 줄 컷)
 	 * 2차원 배열 복사  use Arrays.stream
 	 * 가독성
 	 * </pre>
+	 * 
 	 * @param matrix
 	 * @return
 	 */
-	public String[][] copyMeWithStream(String[][] matrix){
+	public String[][] copyMeWithStream(String[][] matrix) {
 		return Arrays.stream(matrix).map(String[]::clone).toArray(String[][]::new);
 	}
+
 	/**
 	 * <pre>
 	 * C/C++ 소켓 통신 시 주의할 점
@@ -391,13 +395,90 @@ public final class Arr {
 	}
 
 	/**
+	 * <pre>
+	 * 1. AND (교집합): 두 배열에 모두 포함된 요소
+	 * </pre>
+	 * 
+	 * @param a
+	 * @param b
+	 * @return
+	 */
+	public static String[] arrAnd(String[] a, String[] b) {
+		Set<String> set1 = new HashSet<>(Arrays.asList(a));
+		Set<String> set2 = new HashSet<>(Arrays.asList(b));
+
+		set1.retainAll(set2); // 교집합 수행
+		return set1.toArray(new String[0]);
+	}
+
+	/**
+	 * <pre>
+	 * 2. OR (합집합): 두 배열의 모든 요소 (중복 제거)
+	 * </pre>
+	 * 
+	 * @param a
+	 * @param b
+	 * @return
+	 */
+	public static String[] arrOr(String[] a, String[] b) {
+		Set<String> set = new HashSet<>(Arrays.asList(a));
+		set.addAll(Arrays.asList(b)); // 합집합 수행
+
+		return set.toArray(new String[0]);
+	}
+
+	/**
+	 * <pre>
+	 * 3. SUBTRACT (차집합): arr1에서 arr2에 있는 요소를 제외
+	 * </pre>
+	 * 
+	 * @param a
+	 * @param b
+	 * @return
+	 */
+	public static String[] arrSubtract(String[] arr1, String[] arr2) {
+		Set<String> set1 = new HashSet<>(Arrays.asList(arr1));
+		Set<String> set2 = new HashSet<>(Arrays.asList(arr2));
+
+		set1.removeAll(set2); // 차집합 수행
+		return set1.toArray(new String[0]);
+	}
+
+	/**
+	 * <pre>
+	 * arrAndWithSet
+	 * </pre>
+	 * 
+	 * @param a
+	 * @param b
+	 * @return
+	 */
+	public static int[] arrAnd(int[] a, int[] b) {
+		Set<Integer> set = new HashSet<Integer>();
+		if (a.length < b.length) {
+			for (int n : a) {
+				if (Arr.contains(b, n)) {
+					set.add(n);
+				}
+			}
+		} else {
+			for (int n : b) {
+				if (Arr.contains(a, n)) {
+					set.add(n);
+				}
+			}
+		}
+		return Arr.toIntArray(set);
+	}
+
+	/**
 	 * 두 배열을 합친다. 빠르다. - 중복 제거 없슴. = use System.arraycopy
 	 * 
 	 * @param a
 	 * @param b
 	 * @return
 	 */
-	public static int[] combine(int[] a, int[] b) {
+	public static int[] arrOr(int[] a, int[] b) {
 		// 두 배열의 길이를 합친 새 배열 생성
 		int[] combined = new int[a.length + b.length];
 
@@ -415,7 +496,7 @@ public final class Arr {
 	 * @param b
 	 * @return
 	 */
-	public static int[] combineDistinctByStream(int[] a, int[] b) {
+	public static int[] arrOrWithStream(int[] a, int[] b) {
 		int[] combined = IntStream.concat(IntStream.of(a), IntStream.of(b)).distinct().toArray();
 		Arrays.sort(combined);
 		return combined;
@@ -428,7 +509,7 @@ public final class Arr {
 	 * @param b
 	 * @return
 	 */
-	public static int[] combineDistinctBySet(int[] a, int[] b) {
+	public static int[] arrOrWithSet(int[] a, int[] b) {
 		// 1. 중복을 막기 위한 Set 생성
 		Set<Integer> set = new HashSet<>();
 
@@ -460,7 +541,7 @@ public final class Arr {
 	 * @param lastPositionNumbers
 	 * @return
 	 */
-	public static int[] combineDistinctBySet(int[] a, int[] b, int[] c) {
+	public static int[] arrAndWithSet(int[] a, int[] b, int[] c) {
 		// 1. 중복을 막기 위한 Set 생성
 		Set<Integer> set = new HashSet<>();
 
@@ -1442,7 +1523,7 @@ public final class Arr {
 	 * use StringBuilter 빠르다.
 	 * </pre>
 	 *
-	 * @param arr
+	 * @param arr default separator = [ ] space
 	 * @return
 	 */
 	public static String toStringIntArray(int[] arr) {
